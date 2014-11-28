@@ -1,6 +1,15 @@
 
 class BaseCommand:
 
+    def get_unconfig_onu(self):
+        """
+        show onu that not been configure
+        return complete port
+        ex:
+            olt_1/2/2:1
+        """
+        return ["show gpon onu uncfg"]
+
     def config_terminal(self):
         return ["config terminal"]
 
@@ -38,11 +47,11 @@ class BaseCommand:
         """
         return ["tcont %s profile %s" % (tcont_num, profile_name)]
 
-    def set_gemport_tcont(self, num, name, tcont_num, mode):
+    def set_gemport_tcont(self, gemport_num, name, tcont_num, mode):
         """
         select gemport
         """
-        return ["gemport %s name %s %s tcont %s" % (num, name, tcont_num, mode)]
+        return ["gemport %s name %s %s tcont %s" % (gemport_num, name, tcont_num, mode)]
 
     def limit_down_gemport(self, gemport_num, value):
         """
@@ -156,7 +165,7 @@ class BaseCommand:
         """
         set wpa key for ssid
         ex:
-            ssid auth wpa wifi_0/1 wap2-psk key nasa
+            ssid auth wpa wifi_0/1 wap2-psk key <key_here>
         """
         return ["ssid auth wpa %s wpa2-psk key %s" % (wifi_int, key)]
 
@@ -178,9 +187,18 @@ class BaseCommand:
     def save_config(self):
         return ["write"]
 
-class CustomCommand:
-    def __init__(self):
-        self.base = BaseCommand
+    def show_onu_state(self):
+        return ["gpon onu state"]
 
-    def new_olt(self):
-        pass
+class CustomCommand(BaseCommand):
+
+    def register_ont(self, oltnum, onunum, type="ZTEG-F660", sn, customer, address, phone, tcont_num, profile_name):
+        command = []
+        command += self.config_terminal()
+        command += self.select_interface(oltnum)
+        command += self.set_onu_info(onunum, type="ZTEG-F660", sn)
+        command += self.exit()
+        command += self.select_interface(onunum)
+        command += self.set_description(customer, address, phone)
+        command += self.set_profile(tcont_num, profile_name)
+        command += self.set_gemport_tcont(gemport_num, name, tcont_num, mode)

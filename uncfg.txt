@@ -1,0 +1,14 @@
+Trying 172.16.99.6...
+Connected to 172.16.99.6.
+Escape character is '^]'.
+************************************************
+Welcome to ZXAN product C300 of ZTE Corporation
+************************************************
+
+Username:oss
+Password:
+OL01-NGN-JKT-MNCPDC#show gpon onu uncfg
+OnuIndex                 Sn                  State
+---------------------------------------------------------------------
+gpon-onu_1/2/6:1         ZTEGC0432D65        unknown
+gpon-onu_1/2/6:2         ZTEGC04345A4        unknown
