@@ -112,7 +112,7 @@ class BaseCommand:
         """
         return ["ip-host %s dhcp-enable true ping-response true traceroute-response true" % ip_host_num]
 
-    def vlan_filter_mode(self, ip_host_num):
+    def set_vlan_filter_mode(self, ip_host_num):
         """
         set vlan filter mode
         ex:
@@ -120,7 +120,7 @@ class BaseCommand:
         """
         return ["vlan-filter-mode iphost %s tag-filter untag-filter discard" % iphost_num]
 
-    def vlan_filter_priority(self, ip_host_num, priority, vlan):
+    def set_vlan_filter_priority(self, ip_host_num, priority, vlan):
         """
         set vlan iphost priority
         ex:
@@ -128,7 +128,7 @@ class BaseCommand:
         """
         return ["vlan-filter iphost %s priority %s vid %s" % (iphost_num, priority, vlan)]
 
-    def vlan_port_eth_mode(self, eth, vlan):
+    def set_vlan_port_eth_mode(self, eth, vlan):
         """
         set vlan port for eth with vlan number
         ex:
@@ -168,4 +168,19 @@ class BaseCommand:
         """
         return ["ssid ctrl %s hide enable" % wifi_int]
 
+    def set_igmp_vlan(self, vlan, gpon_onu, vport ):
+        """
+        set igmp vlan on gpon onu with vport
+        """
 
+        return ["igmp mvlan %s receive-port %s vport %s" % (vlan, gpon_onu, vport)]
+
+    def save_config(self):
+        return ["write"]
+
+class CustomCommand:
+    def __init__(self):
+        self.base = BaseCommand
+
+    def new_olt(self):
+        pass
