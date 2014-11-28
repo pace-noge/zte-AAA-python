@@ -13,7 +13,7 @@ class BaseCommand:
         """
         return ["interface %s" % interface]
 
-    def onu_info(self, onunum, type="ZTEG-F660", sn):
+    def set_onu_info(self, onunum, type="ZTEG-F660", sn):
         """
         onunum: onu number inside olt
         type: ZTEG-F660
@@ -26,19 +26,19 @@ class BaseCommand:
         """
         return ["exit"]
 
-    def description(self, name, address, phone):
+    def set_description(self, name, address, phone):
         """
         ont description based on customer info
         """
         return ["description %s-%s-%s" % (name, address, phone)]
 
-    def profile(self, tcont_num, profile_name):
+    def set_profile(self, tcont_num, profile_name):
         """
         tcon number, profile_name
         """
         return ["tcont %s profile %s" % (tcont_num, profile_name)]
 
-    def gemport_tcont(self, num, name, tcont_num, mode):
+    def set_gemport_tcont(self, num, name, tcont_num, mode):
         """
         select gemport
         """
@@ -50,7 +50,7 @@ class BaseCommand:
         """
         return ["gemport %s traffic-limit down %s" % (gemport_num, value)]
 
-    def switch_port(self, vlan, vport_num):
+    def set_switch_port(self, vlan, vport_num):
         """
         switch vlan to vport
         """
@@ -167,3 +167,5 @@ class BaseCommand:
             ssid ctrl wifi_0/2 hide enable
         """
         return ["ssid ctrl %s hide enable" % wifi_int]
+
+
