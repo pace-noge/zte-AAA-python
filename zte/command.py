@@ -118,4 +118,52 @@ class BaseCommand:
         ex:
             vlan-filter-mode iphost 1 tag-filter untag-filter discard
         """
-        return ["vlan-filter-mode iphost %s tag-filter untag-filter discard"]
+        return ["vlan-filter-mode iphost %s tag-filter untag-filter discard" % iphost_num]
+
+    def vlan_filter_priority(self, ip_host_num, priority, vlan):
+        """
+        set vlan iphost priority
+        ex:
+            vlan-filter iphost 1 priority 0 vid 607
+        """
+        return ["vlan-filter iphost %s priority %s vid %s" % (iphost_num, priority, vlan)]
+
+    def vlan_port_eth_mode(self, eth, vlan):
+        """
+        set vlan port for eth with vlan number
+        ex:
+            vlan port eth_0/3 mode tag vlan 200
+        """
+        return ["vlan port %s mode tag vlan %S" % (eth, vlan)]
+
+    def set_dhcp_ip(self, eth):
+        """
+        set dhcp unicast to eth
+        ex:
+            dhcp-ip ethuni eth_0/3 from-internet
+        """
+        return ["dhcp-ip ethuni %s" % eth]
+
+    def set_ssid_name(self, wifi_int, name):
+        """
+        set ssid name
+        ex:
+            ssid ctrl wifi_0/1 name Nasa
+        """
+        return ["ssid ctrl %s name %s" % (wifi_int, name)]
+
+    def set_wpa_key(self, wifi_int, key):
+        """
+        set wpa key for ssid
+        ex:
+            ssid auth wpa wifi_0/1 wap2-psk key nasa
+        """
+        return ["ssid auth wpa %s wpa2-psk key %s" % (wifi_int, key)]
+
+    def hide_ssid(self, wifi_int):
+        """
+        hide ssid
+        ex:
+            ssid ctrl wifi_0/2 hide enable
+        """
+        return ["ssid ctrl %s hide enable" % wifi_int]
