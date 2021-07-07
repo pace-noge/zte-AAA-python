@@ -202,3 +202,4 @@ class CustomCommand(BaseCommand):
         command += self.set_description(customer, address, phone)
         command += self.set_profile(tcont_num, profile_name)
         command += self.set_gemport_tcont(gemport_num, name, tcont_num, mode)
+        return command
