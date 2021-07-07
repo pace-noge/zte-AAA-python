@@ -9,4 +9,5 @@ def main():
     register = CustomCommand.register_ont()
     olt.connect()
     olt.send_command(register)
-    
+    olt.disconnect()
+
